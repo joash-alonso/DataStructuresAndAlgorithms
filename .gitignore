@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Notebooks and VENV
+dsa 
+*.ipynb
+
 # C extensions
 *.so
 
