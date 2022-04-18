@@ -1,7 +1,7 @@
-# %% [markdown]
-# import time
-# import numpy as np
-# import matplotlib.pyplot as plt
+# %%
+import time
+import numpy as np
+import matplotlib.pyplot as plt
 
 # %% [markdown]
 # ## What is big O notation?
@@ -9,7 +9,7 @@
 #
 # ### What is good code?
 # + Readable: easy to understand and read
-# + Scalable: robust
+# + Scalable: robust. Speed and memory.
 
 # %%
 # Helper Function - Plotting Decorator
@@ -84,17 +84,6 @@ def compress_first_box(elements=[1, 10, 100, 1000, 10000]):
     return elements, time_array
 
 
-# %%
-elements = np.array([1, 10, 100, 1000, 10000])
-time_results = np.array(
-    [results_1, results_10, results_100, results_1000, results_10000]
-)
-
-plt.plot(elements, time_results)
-plt.ylabel("Time (s)")
-plt.xlabel("Number of Elements")
-plt.show()
-
 # %% [markdown]
 # What is the time complexity?
 # ```python
@@ -140,4 +129,142 @@ plt.show()
 # Solution: Time complexity is O(n) <-- O(7n+4)
 
 # %% [markdown]
+# ## 4 Rules of Big O
 #
+# + **Rule** 1: Worst Case
+# Assume the worst case scenario. In the finding_nemo example, what happens if nemo was the final element in the array?
+# This means that when iterating through the list, you still have to go through all items in the list
+#
+# + **Rule 2**: Remove Constants
+# Remove any constant terms, O(1) operations, as this does not contribute to efficiency
+#
+# + **Rule 3**: Different terms for inputs
+# Assign different variables if different, inputs
+#     ```javascript
+#     function func(input_a, input_b) {
+#         input_a.forEach(function(input)) {
+#             console.log(input)
+#         });
+#
+#         input_b.forEach(function(input)) {
+#             console.log(input)
+#         });
+#     }
+#     ```
+#
+#     Solution: O(n+m), if loops are nested, then O(nm)
+#
+# + **Rule 4**: Drop Non Dominants
+# Drop the lowest order. If the time complexity is O(n + n^2) --> O(n)
+#
+
+# %% [markdown]
+# # O(n^2): Quadratic Time
+
+# %%
+
+
+@plot
+def log_all_pairs_of_array(
+    elements=[
+        1,
+        10,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1500,
+        2000,
+        2500,
+        3000,
+        3500,
+        4000,
+        4500,
+        5000,
+        10000,
+        100000,
+    ]
+):
+    time_array = []
+    for element in elements:
+        array = np.arange(0, element, 1)
+        print(len(array))
+        start = time.time()
+        for number_a in array:
+            for number_b in array:
+                continue
+        end = time.time()
+        time_taken = end - start
+        time_array.append(time_taken)
+    return elements, time_array
+
+
+log_all_pairs_of_array()
+
+
+# %% [markdown]
+# ## Big O Cheatsheet
+#
+# + **O(1)** - constant, no loops
+# + **O(log n)** - logarithmic, usually searching algorithms if sored
+# + **O(n)** - linear, for/while lkoops
+# + **O(n log n)** - log linear, usually sorting operations
+# + **O(n^2)** - quadratic, nested loops, every element in a collection needs to be compared to every other element
+# + **O(2^n)** - exponential, recursive algorithms that solve a problem of size n
+# + **O(n!)** - adding a loop for every element
+#
+# + Iterating through half a collection is still O(n)
+# + Two Separate coolections: O(a*b)
+#
+# ### What can cause time in a function?
+# + Operations
+# + Comparisons
+# + Looping
+# + Outside Function Call
+#
+# ### What causes Space complexity?
+# + **Variables**
+# + **Data Structures**
+# + **Function Call**
+# + **Allocations**
+
+# %% [markdown]
+# ## Space Complexity:
+#
+# + **Heap**: Where variables are stored
+# + **Stack**: Where we keep track of function calls
+
+# %%
+# What is the space and time complexity for this function:
+
+
+def boo(n):
+    for i in range(len(n)):
+        print("Boo!")
+
+
+boo([1, 2, 3, 4, 5])
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
+
+def array_of_hi_n_time(n):
+    hi_array = []
+    for item in n:
+        hi_array.append("Hi!")
+    return hi_array
+
+
+array_of_hi_n_time([1, 2, 3, 4, 5])
+
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
+# %%
